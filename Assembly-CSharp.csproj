@@ -45,7 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\BattleSystem\StatCalculator.cs" />
+     <Compile Include="Assets\BattleUnits\BattleTeam.cs" />
      <Compile Include="Assets\BattleUnits\BattleUnitModel.cs" />
      <Compile Include="Assets\DataModels\FigurineModel.cs" />
      <Compile Include="Assets\DataModels\StatWeightModel.cs" />

@@ -3,12 +3,12 @@ using System.Collections;
 
 public class FigurineModel : ScriptableObject {
   [SerializeField] int id;
-  [SerializeField] string name;
+  [SerializeField] string figureName;
   [SerializeField] Sprite sprite;
   [SerializeField] StatWeightModel statWeightModel;
 
   public int Id { get { return id; } }
-  public string Name { get { return name; } }
+  public string Name { get { return figureName; } }
   public Sprite Sprite { get { return sprite; } }
 
   public int Strength { get { return statWeightModel.Strength; } }
