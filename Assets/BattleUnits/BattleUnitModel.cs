@@ -20,10 +20,10 @@ public class UnitAction
   }
 }
 
-public class BattleUnitModel {
+public class BattleUnit {
   private FigurineModel model;
 
-  //Battle State
+  #region Battle State
   int currentHealth;
   int maxHealth;
 
@@ -34,6 +34,7 @@ public class BattleUnitModel {
 
   UnitAction nextAction;
   bool actionQueued = false;
+  #endregion
 
   public void Init(FigurineModel model) {
     this.model = model;
@@ -48,22 +49,30 @@ public class BattleUnitModel {
 
   private void InitBattleState() {
     SetMaxHealth();
-    SetAutoAttackTimer();
+    SetAutoAttackTimer(true);
+    castTimer = 0;
     actionQueued = false;
   }
 
-  private void SetMaxHealth() {
-    currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);
-  }
-
+  #region Timers
   //Reset AutoAttack Timer
-  private void SetAutoAttackTimer() {
+  private void SetAutoAttackTimer(bool randomHeadstart = false) {
     autoAttackTimer = StatCalculator.AttackTimerFromAgility(model.Agility);
+
+    //At battle start, units will stagger auto-attack timers slightly
+    if (randomHeadstart) {
+      autoAttackTimer += UnityEngine.Random.Range( -10, 10 );
+    }
   }
 
   //Each Frame: Decrement AutoAttack timer by 1 (unless casting)
   private void ProcessAutoAttackTimer() {
+    //Freeze autoattack while casting
+    if (castTimer > 0) {
+      return;
+    }
 
+    autoAttackTimer--;
   }
 
   private void StartCastTime() {
@@ -74,6 +83,23 @@ public class BattleUnitModel {
   private void ProcessCastTimer() {
 
   }
+  #endregion
+
+  #region Health
+  public bool IsAlive { get { return currentHealth > 0; } }
+
+  private void SetMaxHealth() {
+    currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);
+  }
+
+  public void Damage(int amount) {
+    currentHealth = Mathf.Max( currentHealth - amount, 0 );
+  }
+
+  public void Heal(int amount) {
+    currentHealth = Mathf.Min( currentHealth + amount, maxHealth );
+  }
+  #endregion
 
   private void QueueAction(UnitAction action) {
     nextAction = action;
@@ -81,8 +107,23 @@ public class BattleUnitModel {
   }
 
   //Processing Acting Turn
-  public UnitAction CheckForAction() {
+  public void ProcessFrame() {
+    if (!IsAlive) {
+      return;
+    }
+
+    //Auto-Attack
+    if (autoAttackTimer <= 0) {
+      QueueAction( new UnitAction(model, UnitAction.ActionType.AutoAttack, 0) );
+      SetAutoAttackTimer();
+    } else {
+      ProcessAutoAttackTimer();
+    }
+  }
+
+  public UnitAction ReadiedAction() {
     if (actionQueued) {
+      actionQueued = false;
       return nextAction;
     } else {
       return null;
