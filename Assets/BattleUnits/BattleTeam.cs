@@ -3,11 +3,13 @@ using System.Collections;
 
 public class BattleTeam
 {
-  public BattleUnitModel[] battleUnits;
+  public BattleUnit[] battleUnits;
 	
-  public void Init(BattleUnitModel[] battleUnits) {
+  public void Init(BattleUnit[] battleUnits) {
     this.battleUnits = battleUnits;
   }
 
+  public void DeliverAction(UnitAction action) {
 
+  }
 }
