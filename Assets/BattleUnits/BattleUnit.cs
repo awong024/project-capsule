@@ -18,6 +18,16 @@ public class UnitAction
     this.type = type;
     this.target = target;
   }
+
+  public int Damage {
+    get
+    {
+      if (type == ActionType.AutoAttack) {
+        return StatCalculator.AutoDamageFromStrength(model.Strength);
+      }
+      return 0;
+    }
+  }
 }
 
 public class BattleUnit {
@@ -87,6 +97,8 @@ public class BattleUnit {
 
   #region Health
   public bool IsAlive { get { return currentHealth > 0; } }
+
+  public int Threat { get { return threat; } }
 
   private void SetMaxHealth() {
     currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);
