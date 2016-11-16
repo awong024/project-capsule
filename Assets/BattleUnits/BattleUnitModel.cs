@@ -9,8 +9,15 @@ public class UnitAction
     Ability2
   }
 
+  public FigurineModel model;
   public ActionType type;
   public int target; //0 = no target
+
+  public UnitAction(FigurineModel model, ActionType type, int target = 0) {
+    this.model = model;
+    this.type = type;
+    this.target = target;
+  }
 }
 
 public class BattleUnitModel {
