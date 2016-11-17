@@ -31,5 +31,14 @@ public class BattleSystem : MonoBehaviour
         myTeam.DeliverAction(action);
       }
     }
+
+    //Game Over conditions
+    if (myTeam.AllDead) {
+      //TODO: My team's dead
+    } else if (opponentTeam.AllDead) {
+      //TODO: Their team's dead
+    } else if (myTeam.AllDead && opponentTeam.AllDead) {
+      //TODO: Both team's dead
+    }
   }
 }

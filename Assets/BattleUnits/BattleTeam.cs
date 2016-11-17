@@ -10,6 +10,32 @@ public class BattleTeam
   }
 
   public void DeliverAction(UnitAction action) {
+    if (action.type == UnitAction.ActionType.AutoAttack) {
+      battleUnits[HighestThreatUnit()].Damage(action.Damage);
+    }
+  }
 
+  private int HighestThreatUnit() {
+    int index = 0;
+    int highestThreat = 0;
+
+    for (int i = 0; i < battleUnits.Length; i++) {
+      if (battleUnits[i].IsAlive && battleUnits[i].Threat > highestThreat) {
+        index = i;
+        highestThreat = battleUnits[i].Threat;
+      }
+    }
+    return index;
+  }
+
+  public bool AllDead {
+    get {
+      for (int i = 0; i < battleUnits.Length; i++) {
+        if (battleUnits[i].IsAlive) {
+          return false;
+        }
+      }
+      return true;
+    }
   }
 }
