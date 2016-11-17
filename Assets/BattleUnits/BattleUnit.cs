@@ -33,6 +33,11 @@ public class UnitAction
 public class BattleUnit {
   private FigurineModel model;
 
+  #region Accessors
+  public FigurineModel FigurineModel { get { return model; } }
+  public int Threat { get { return threat; } }
+  #endregion
+
   #region Battle State
   int currentHealth;
   int maxHealth;
@@ -97,8 +102,6 @@ public class BattleUnit {
 
   #region Health
   public bool IsAlive { get { return currentHealth > 0; } }
-
-  public int Threat { get { return threat; } }
 
   private void SetMaxHealth() {
     currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);

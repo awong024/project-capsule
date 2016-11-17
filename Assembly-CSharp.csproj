@@ -46,9 +46,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BattleSystem\BattleSystem.cs" />
+     <Compile Include="Assets\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\BattleSystem\StatCalculator.cs" />
      <Compile Include="Assets\BattleUnits\BattleTeam.cs" />
+     <Compile Include="Assets\BattleUnits\BattleTeamView.cs" />
      <Compile Include="Assets\BattleUnits\BattleUnit.cs" />
+     <Compile Include="Assets\BattleUnits\BattleUnitView.cs" />
      <Compile Include="Assets\DataModels\FigurineModel.cs" />
      <Compile Include="Assets\DataModels\StatWeightModel.cs" />
      <Compile Include="Assets\Utility\CreateScriptableObjects.cs" />

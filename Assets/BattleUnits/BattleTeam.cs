@@ -5,8 +5,13 @@ public class BattleTeam
 {
   public BattleUnit[] battleUnits;
 	
-  public void Init(BattleUnit[] battleUnits) {
-    this.battleUnits = battleUnits;
+  public void Init(FigurineModel[] models) {
+    battleUnits = new BattleUnit[models.Length];
+
+    for (int i = 0; i < battleUnits.Length; i++) {
+      battleUnits[i] = new BattleUnit();
+      battleUnits[i].Init(models[i]);
+    }
   }
 
   public void DeliverAction(UnitAction action) {
