@@ -25,7 +25,7 @@ public class BattleTeam
     int highestThreat = 0;
 
     for (int i = 0; i < battleUnits.Length; i++) {
-      if (battleUnits[i].IsAlive && battleUnits[i].Threat > highestThreat) {
+      if (battleUnits[i].IsAlive && battleUnits[i].Threat >= highestThreat) {
         index = i;
         highestThreat = battleUnits[i].Threat;
       }

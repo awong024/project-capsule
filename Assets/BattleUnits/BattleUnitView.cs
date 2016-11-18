@@ -5,6 +5,8 @@ using System.Collections;
 public class BattleUnitView : MonoBehaviour
 {
   [SerializeField] Image image;
+  [SerializeField] Image healthBar;
+  [SerializeField] Image attackBar;
 
   private BattleUnit battleUnit;
 
@@ -13,7 +15,8 @@ public class BattleUnitView : MonoBehaviour
     image.sprite = battleUnit.FigurineModel.Sprite;
   }
 
-  private void Update() { 
-    //Update UI
+  public void UpdateView(BattleUnit unit) { 
+    healthBar.fillAmount = (float)unit.CurrentHealth / (float)unit.MaxHealth;
+    attackBar.fillAmount = 1f - ((float)unit.AutoAttackTimer / (float)unit.MaxAttackTimer);
   }
 }

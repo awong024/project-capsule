@@ -8,6 +8,8 @@ public class BattleTeamView : MonoBehaviour
 
   [SerializeField] GameObject[] teamSlots;
 
+  private BattleUnitView[] battleUnitViews = new BattleUnitView[4];
+
   public void Render(BattleTeam team) {
     for (int i = 0; i < team.battleUnits.Length; i++) {
       GameObject obj = GameObject.Instantiate(battleUnitPrefab) as GameObject;
@@ -15,6 +17,11 @@ public class BattleTeamView : MonoBehaviour
 
       BattleUnitView view = obj.GetComponent<BattleUnitView>();
       view.Render(team.battleUnits[i]);
+      battleUnitViews[i] = view;
     }
+  }
+
+  public void UpdateUnitView(BattleUnit battleUnit, int index) {
+    battleUnitViews[index].UpdateView(battleUnit);
   }
 }

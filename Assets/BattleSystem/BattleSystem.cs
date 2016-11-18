@@ -53,6 +53,7 @@ public class BattleSystem : MonoBehaviour
     for (int i = 0; i < myTeam.battleUnits.Length; i++) {
       BattleUnit unit = myTeam.battleUnits[i];
       unit.ProcessFrame();
+      myTeamView.UpdateUnitView(unit, i);
 
       UnitAction action = unit.ReadiedAction();
       if (action != null) {
@@ -63,6 +64,7 @@ public class BattleSystem : MonoBehaviour
     for (int i = 0; i < opponentTeam.battleUnits.Length; i++) {
       BattleUnit unit = opponentTeam.battleUnits[i];
       unit.ProcessFrame();
+      opponentTeamView.UpdateUnitView(unit, i);
 
       UnitAction action = unit.ReadiedAction();
       if (action != null) {

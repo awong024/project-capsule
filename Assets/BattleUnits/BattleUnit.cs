@@ -35,6 +35,10 @@ public class BattleUnit {
 
   #region Accessors
   public FigurineModel FigurineModel { get { return model; } }
+  public int CurrentHealth { get { return currentHealth; } }
+  public int MaxHealth { get { return maxHealth; } }
+  public int AutoAttackTimer { get { return autoAttackTimer; } }
+  public int MaxAttackTimer { get { return maxAttackTimer; } }
   public int Threat { get { return threat; } }
   #endregion
 
@@ -45,7 +49,10 @@ public class BattleUnit {
   int threat;
 
   int autoAttackTimer;
+  int maxAttackTimer;
+
   int castTimer;
+  int maxCastTimer;
 
   UnitAction nextAction;
   bool actionQueued = false;
@@ -72,7 +79,7 @@ public class BattleUnit {
   #region Timers
   //Reset AutoAttack Timer
   private void SetAutoAttackTimer(bool randomHeadstart = false) {
-    autoAttackTimer = StatCalculator.AttackTimerFromAgility(model.Agility);
+    autoAttackTimer = maxAttackTimer = StatCalculator.AttackTimerFromAgility(model.Agility);
 
     //At battle start, units will stagger auto-attack timers slightly
     if (randomHeadstart) {
