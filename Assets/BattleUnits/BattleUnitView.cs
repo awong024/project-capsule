@@ -9,13 +9,6 @@ public class BattleUnitView : MonoBehaviour
   [SerializeField] Image attackBar;
   [SerializeField] Animator fxAnimator;
 
-  public enum UnitFX {
-    AutoAttack,
-    CastSpell,
-    Hit,
-    Heal
-  }
-
   private BattleUnit battleUnit;
 
   public void Render(BattleUnit battleUnit) {
@@ -28,7 +21,7 @@ public class BattleUnitView : MonoBehaviour
     attackBar.fillAmount = 1f - ((float)unit.AutoAttackTimer / (float)unit.MaxAttackTimer);
   }
 
-  public void AnimateFX(UnitFX fx) {
+  public void AnimateFX(UnitAction.ActionFX fx) {
     fxAnimator.SetTrigger(fx.ToString());
   }
 }
