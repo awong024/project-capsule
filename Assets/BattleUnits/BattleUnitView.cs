@@ -7,6 +7,14 @@ public class BattleUnitView : MonoBehaviour
   [SerializeField] Image image;
   [SerializeField] Image healthBar;
   [SerializeField] Image attackBar;
+  [SerializeField] Animator fxAnimator;
+
+  public enum UnitFX {
+    AutoAttack,
+    CastSpell,
+    Hit,
+    Heal
+  }
 
   private BattleUnit battleUnit;
 
@@ -18,5 +26,9 @@ public class BattleUnitView : MonoBehaviour
   public void UpdateView(BattleUnit unit) { 
     healthBar.fillAmount = (float)unit.CurrentHealth / (float)unit.MaxHealth;
     attackBar.fillAmount = 1f - ((float)unit.AutoAttackTimer / (float)unit.MaxAttackTimer);
+  }
+
+  public void AnimateFX(UnitFX fx) {
+    fxAnimator.SetTrigger(fx.ToString());
   }
 }
