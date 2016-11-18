@@ -16,7 +16,8 @@ public class BattleTeam
 
   public void DeliverAction(UnitAction action) {
     if (action.type == UnitAction.ActionType.AutoAttack) {
-      battleUnits[HighestThreatUnit()].Damage(action.Damage);
+      BattleUnit unit = battleUnits[HighestThreatUnit()];
+      unit.Damage(action.Damage);
     }
   }
 

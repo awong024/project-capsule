@@ -9,14 +9,32 @@ public class UnitAction
     Ability2
   }
 
+  public enum ActionFX {
+    AutoAttack,
+    CastSpell,
+    Hit,
+    Heal
+  }
+
   public FigurineModel model;
   public ActionType type;
   public int target; //0 = no target
+
+  public ActionFX owner_actionFX;
+  public ActionFX recipient_actionFX;
 
   public UnitAction(FigurineModel model, ActionType type, int target = 0) {
     this.model = model;
     this.type = type;
     this.target = target;
+
+    if (type == ActionType.AutoAttack) {
+      owner_actionFX = ActionFX.AutoAttack;
+      recipient_actionFX = ActionFX.Hit; 
+    } else if (type == ActionType.Ability1 || type == ActionType.Ability2) {
+      owner_actionFX = ActionFX.CastSpell;
+      recipient_actionFX = ActionFX.Hit;
+    }
   }
 
   public int Damage {
