@@ -3,11 +3,8 @@ using System.Collections;
 
 public class BattleSystem : MonoBehaviour
 {
-  [SerializeField] BattleTeamView myTeamView;
-  [SerializeField] BattleTeamView opponentTeamView;
-
-  private BattleTeam myTeam;
-  private BattleTeam opponentTeam;
+  [SerializeField] BattleTeamController homeTeam;
+  [SerializeField] BattleTeamController awayTeam;
 
   public enum FrameSpeed {
     Medium,
@@ -24,12 +21,9 @@ public class BattleSystem : MonoBehaviour
 
   bool gameOver = false;
 
-  public void Init(BattleTeam t1, BattleTeam t2) {
-    myTeam = t1;
-    opponentTeam = t2;
-
-    myTeamView.Render(myTeam);
-    opponentTeamView.Render(opponentTeam);
+  public void Init(FigurineModel[] t1, FigurineModel[] t2) {
+    homeTeam.Init(t1);
+    awayTeam.Init(t2);
 
     StartGame();
   }
@@ -50,38 +44,16 @@ public class BattleSystem : MonoBehaviour
   }
 
   private void ProcessFrame() {
-    for (int i = 0; i < myTeam.battleUnits.Length; i++) {
-      BattleUnit unit = myTeam.battleUnits[i];
-
-      unit.ProcessFrame();
-      myTeamView.BattleUnitViews[i].UpdateView(unit);
-
-      UnitAction action = unit.ReadiedAction();
-      if (action != null) {
-        opponentTeam.DeliverAction(action);
-        myTeamView.BattleUnitViews[i].AnimateFX(action.owner_actionFX);
-      }
-    }
-
-    for (int i = 0; i < opponentTeam.battleUnits.Length; i++) {
-      BattleUnit unit = opponentTeam.battleUnits[i];
-      unit.ProcessFrame();
-      opponentTeamView.BattleUnitViews[i].UpdateView(unit);
-
-      UnitAction action = unit.ReadiedAction();
-      if (action != null) {
-        myTeam.DeliverAction(action);
-        opponentTeamView.BattleUnitViews[i].AnimateFX(action.owner_actionFX);
-      }
-    }
+    homeTeam.ProcessFrame();
+    awayTeam.ProcessFrame();
 
     //Game Over conditions
-    if (myTeam.AllDead) {
-      //TODO: My team's dead
-    } else if (opponentTeam.AllDead) {
-      //TODO: Their team's dead
-    } else if (myTeam.AllDead && opponentTeam.AllDead) {
-      //TODO: Both team's dead
-    }
+//    if (myTeam.AllDead) {
+//      //TODO: My team's dead
+//    } else if (opponentTeam.AllDead) {
+//      //TODO: Their team's dead
+//    } else if (myTeam.AllDead && opponentTeam.AllDead) {
+//      //TODO: Both team's dead
+//    }
   }
 }

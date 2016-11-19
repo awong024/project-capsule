@@ -1,53 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitAction
-{
-  public enum ActionType {
-    AutoAttack,
-    Ability1,
-    Ability2
-  }
-
-  public enum ActionFX {
-    AutoAttack,
-    CastSpell,
-    Hit,
-    Heal
-  }
-
-  public FigurineModel model;
-  public ActionType type;
-  public int target; //0 = no target
-
-  public ActionFX owner_actionFX;
-  public ActionFX recipient_actionFX;
-
-  public UnitAction(FigurineModel model, ActionType type, int target = 0) {
-    this.model = model;
-    this.type = type;
-    this.target = target;
-
-    if (type == ActionType.AutoAttack) {
-      owner_actionFX = ActionFX.AutoAttack;
-      recipient_actionFX = ActionFX.Hit; 
-    } else if (type == ActionType.Ability1 || type == ActionType.Ability2) {
-      owner_actionFX = ActionFX.CastSpell;
-      recipient_actionFX = ActionFX.Hit;
-    }
-  }
-
-  public int Damage {
-    get
-    {
-      if (type == ActionType.AutoAttack) {
-        return StatCalculator.AutoDamageFromStrength(model.Strength);
-      }
-      return 0;
-    }
-  }
-}
-
 public class BattleUnit {
   private FigurineModel model;
 
@@ -58,6 +11,13 @@ public class BattleUnit {
   public int AutoAttackTimer { get { return autoAttackTimer; } }
   public int MaxAttackTimer { get { return maxAttackTimer; } }
   public int Threat { get { return threat; } }
+  #endregion
+
+  #region Stats
+  public int Strength { get { return model.Strength; } }
+  public int Agility { get { return model.Agility; } }
+  public int Intellect { get { return model.Intellect; } }
+  public int Vitality { get { return model.Vitality; } }
   #endregion
 
   #region Battle State
@@ -78,13 +38,7 @@ public class BattleUnit {
 
   public void Init(FigurineModel model) {
     this.model = model;
-
-    Render(model);
     InitBattleState();
-  }
-
-  private void Render(FigurineModel model) {
-    //TODO: Render View
   }
 
   private void InitBattleState() {
@@ -154,7 +108,7 @@ public class BattleUnit {
 
     //Auto-Attack
     if (autoAttackTimer <= 0) {
-      QueueAction( new UnitAction(model, UnitAction.ActionType.AutoAttack, 0) );
+      QueueAction( new UnitAction(UnitAction.ActionType.AutoAttack) );
       SetAutoAttackTimer();
     } else {
       ProcessAutoAttackTimer();

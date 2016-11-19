@@ -2,6 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 
+public enum ActionFX {
+  AutoAttack,
+  CastSpell,
+  Hit,
+  Heal
+}
+
 public class BattleUnitView : MonoBehaviour
 {
   [SerializeField] Image image;
@@ -9,10 +16,7 @@ public class BattleUnitView : MonoBehaviour
   [SerializeField] Image attackBar;
   [SerializeField] Animator fxAnimator;
 
-  private BattleUnit battleUnit;
-
   public void Render(BattleUnit battleUnit) {
-    this.battleUnit = battleUnit;
     image.sprite = battleUnit.FigurineModel.Sprite;
   }
 
@@ -21,7 +25,7 @@ public class BattleUnitView : MonoBehaviour
     attackBar.fillAmount = 1f - ((float)unit.AutoAttackTimer / (float)unit.MaxAttackTimer);
   }
 
-  public void AnimateFX(UnitAction.ActionFX fx) {
+  public void AnimateFX(ActionFX fx) {
     fxAnimator.SetTrigger(fx.ToString());
   }
 }
