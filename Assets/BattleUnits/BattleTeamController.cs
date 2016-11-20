@@ -4,13 +4,26 @@ using System.Collections.Generic;
 
 public class BattleTeamController : MonoBehaviour
 {
-  [SerializeField] BattleUnitController[] battleUnitControllers;
+  [SerializeField] BattleTeamView battleTeamView;
+  [SerializeField] UnitFrame[] unitFrames;
 
-  private BattleTeamController opposingTeam;
+  private BattleUnitController[] battleUnitControllers;
+
+  public BattleTeamController opposingTeam { private get; set; }
 	
   public void Init(FigurineModel[] models) {
+    battleUnitControllers = new BattleUnitController[models.Length];
+
+    //Create units from prefab into slots and retrieve their controllers
+    battleTeamView.Render(models, ref battleUnitControllers);
+
     for (int i = 0; i < models.Length; i++) {
       battleUnitControllers[i].Init(models[i]);
+    }
+
+    //Assign Unit Frames to units
+    for (int i = 0; i < battleUnitControllers.Length && i < unitFrames.Length; i++) {
+      unitFrames[i].Init(battleUnitControllers[i]);
     }
   }
 
@@ -20,6 +33,10 @@ public class BattleTeamController : MonoBehaviour
       if (action != null) {
         action.unit = battleUnitControllers[i].BattleUnit;
         PackageAction(action, battleUnitControllers[i]);
+      }
+
+      if (unitFrames.Length > i) {
+        unitFrames[i].Render();
       }
     }
   }

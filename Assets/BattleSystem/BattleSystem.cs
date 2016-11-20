@@ -6,6 +6,7 @@ public class BattleSystem : MonoBehaviour
   [SerializeField] BattleTeamController homeTeam;
   [SerializeField] BattleTeamController awayTeam;
 
+
   public enum FrameSpeed {
     Medium,
     Fast,
@@ -24,6 +25,9 @@ public class BattleSystem : MonoBehaviour
   public void Init(FigurineModel[] t1, FigurineModel[] t2) {
     homeTeam.Init(t1);
     awayTeam.Init(t2);
+
+    homeTeam.opposingTeam = awayTeam;
+    awayTeam.opposingTeam = homeTeam;
 
     StartGame();
   }

@@ -15,6 +15,8 @@ public class BattleUnitController : MonoBehaviour
   public void Init(FigurineModel model) {
     battleUnit = new BattleUnit();
     battleUnit.Init(model);
+
+    battleUnitView.Render(battleUnit);
   }
 
   public UnitAction ProcessFrame() {
