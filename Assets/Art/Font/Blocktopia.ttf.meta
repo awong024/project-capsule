@@ -3,13 +3,14 @@ guid: e3a2e6a7f4b8e462a83850661cbbccb7
 timeCreated: 1479414794
 licenseType: Pro
 TrueTypeFontImporter:
-  serializedVersion: 3
+  serializedVersion: 4
   fontSize: 16
   forceTextureCase: -1
-  characterSpacing: 1
-  characterPadding: 0
+  characterSpacing: 0
+  characterPadding: 1
   includeFontData: 1
-  fontNames: []
+  fontNames:
+  - Blocktopia
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
