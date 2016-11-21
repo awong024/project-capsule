@@ -7,7 +7,7 @@ public class BattleTestHarness : MonoBehaviour
   [SerializeField] FigurineModel[] homeTeam;
   [SerializeField] FigurineModel[] awayTeam;
 
-  void Start() {
+  public void StartBattle() {
     battleSystem.Init(homeTeam, awayTeam);
   }
 }

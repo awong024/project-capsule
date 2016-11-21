@@ -25,7 +25,7 @@ public class UnitFrame : MonoBehaviour {
 
   public void Render() {
     healthBar.fillAmount = (float)unit.BattleUnit.CurrentHealth / (float)unit.BattleUnit.MaxHealth;
-    energyBar.fillAmount = (float)unit.BattleUnit.Energy / 100f;
+    energyBar.fillAmount = (float)unit.BattleUnit.Energy / 1000f;
   }
 
   public void Ability1_Clicked() {

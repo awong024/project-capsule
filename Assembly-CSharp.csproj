@@ -61,6 +61,8 @@
      <Compile Include="Assets\Gacha\GachaPanel.cs" />
      <Compile Include="Assets\Gacha\PrizePanel.cs" />
      <Compile Include="Assets\Utility\CreateScriptableObjects.cs" />
+     <Compile Include="Assets\Utility\LobbyPanel.cs" />
+     <Compile Include="Assets\Utility\PanelController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

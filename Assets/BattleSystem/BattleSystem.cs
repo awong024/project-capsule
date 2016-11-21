@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BattleSystem : MonoBehaviour
@@ -6,6 +7,7 @@ public class BattleSystem : MonoBehaviour
   [SerializeField] BattleTeamController homeTeam;
   [SerializeField] BattleTeamController awayTeam;
 
+  [SerializeField] Text gameOverMessage; //Remove UI elements later
 
   public enum FrameSpeed {
     Medium,
@@ -34,6 +36,8 @@ public class BattleSystem : MonoBehaviour
 
   private void StartGame() {
     gameOver = false;
+    gameOverMessage.gameObject.SetActive(false);
+
     StartCoroutine(GameLoop());
   }
 
@@ -51,13 +55,21 @@ public class BattleSystem : MonoBehaviour
     homeTeam.ProcessFrame();
     awayTeam.ProcessFrame();
 
-    //Game Over conditions
-//    if (myTeam.AllDead) {
-//      //TODO: My team's dead
-//    } else if (opponentTeam.AllDead) {
-//      //TODO: Their team's dead
-//    } else if (myTeam.AllDead && opponentTeam.AllDead) {
-//      //TODO: Both team's dead
-//    }
+//    Game Over conditions
+    if (homeTeam.AllDead) {
+      gameOver = true;
+      DisplayGameOver("YOU LOSE!");
+    } else if (awayTeam.AllDead) {
+      gameOver = true;
+      DisplayGameOver("WINNER!");
+    } else if (homeTeam.AllDead && awayTeam.AllDead) {
+      gameOver = true;
+      DisplayGameOver("DRAW!");
+    }
+  }
+
+  private void DisplayGameOver(string text) {
+    gameOverMessage.gameObject.SetActive(true);
+    gameOverMessage.text = text;
   }
 }

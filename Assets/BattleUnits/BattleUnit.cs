@@ -35,7 +35,7 @@ public class BattleUnit {
 
   int energy;
 
-  const int MAX_ENERGY = 100;
+  const int MAX_ENERGY = 1000;
 
   UnitAction nextAction;
   bool actionQueued = false;
@@ -141,6 +141,7 @@ public class BattleUnit {
     //Auto-Attack
     if (autoAttackTimer <= 0) {
       QueueAction( new UnitAction(UnitAction.ActionType.AutoAttack) );
+      threat += 5; //for testing
       SetAutoAttackTimer();
     } else {
       ProcessAutoAttackTimer();
