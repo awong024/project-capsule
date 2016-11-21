@@ -6,6 +6,8 @@ public class FigurineModel : ScriptableObject {
   [SerializeField] string figureName;
   [SerializeField] Sprite sprite;
   [SerializeField] StatWeightModel statWeightModel;
+  [SerializeField] UnitAbility ability1;
+  [SerializeField] UnitAbility ability2;
 
   public int Id { get { return id; } }
   public string Name { get { return figureName; } }
@@ -15,4 +17,7 @@ public class FigurineModel : ScriptableObject {
   public int Agility { get { return statWeightModel.Agility; } }
   public int Intellect { get { return statWeightModel.Intellect; } }
   public int Vitality { get { return statWeightModel.Vitality; } }
+
+  public UnitAbility Ability1 { get { return ability1; } }
+  public UnitAbility Ability2 { get { return ability2; } }
 }

@@ -1,0 +1,17 @@
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/alexwong/Desktop/project-capsule/obj/Debug/Assembly-CSharp.dll
+/Users/alexwong/Desktop/project-capsule/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEditor.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Mono.Cecil.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.DataContract.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Mono.Cecil.Mdb.dll

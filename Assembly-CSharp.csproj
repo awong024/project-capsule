@@ -48,6 +48,7 @@
      <Compile Include="Assets\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\BattleSystem\StatCalculator.cs" />
+     <Compile Include="Assets\BattleSystem\UnitAbility.cs" />
      <Compile Include="Assets\BattleSystem\UnitAction.cs" />
      <Compile Include="Assets\BattleUI\UnitFrame.cs" />
      <Compile Include="Assets\BattleUnits\BattleTeamController.cs" />

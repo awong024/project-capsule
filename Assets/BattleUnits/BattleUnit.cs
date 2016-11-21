@@ -10,6 +10,7 @@ public class BattleUnit {
   public int MaxHealth { get { return maxHealth; } }
   public int AutoAttackTimer { get { return autoAttackTimer; } }
   public int MaxAttackTimer { get { return maxAttackTimer; } }
+  public int Energy { get { return energy; } }
   public int Threat { get { return threat; } }
   #endregion
 
@@ -32,6 +33,10 @@ public class BattleUnit {
   int castTimer;
   int maxCastTimer;
 
+  int energy;
+
+  const int MAX_ENERGY = 100;
+
   UnitAction nextAction;
   bool actionQueued = false;
   #endregion
@@ -44,6 +49,7 @@ public class BattleUnit {
   private void InitBattleState() {
     SetMaxHealth();
     SetAutoAttackTimer(true);
+    SetEnergyTimer(0);
     castTimer = 0;
     actionQueued = false;
   }
@@ -67,6 +73,14 @@ public class BattleUnit {
     }
 
     autoAttackTimer--;
+  }
+
+  private void SetEnergyTimer(int amount) {
+    energy = amount;
+  }
+
+  private void ProcessEnergyTimer() {
+    energy = Mathf.Min( MAX_ENERGY, energy + StatCalculator.EnergyPerTurnFromAgilityAndIntellect(model.Agility, model.Intellect) );
   }
 
   private void StartCastTime() {
@@ -100,9 +114,27 @@ public class BattleUnit {
     actionQueued = true;
   }
 
+  //Use Ability from UnitFrame
+  public void UseAbility(int num) {
+    if (energy >= MAX_ENERGY) {
+      if (num == 1 && FigurineModel.Ability1 != null) {
+        QueueAction( new UnitAction(FigurineModel.Ability1) );
+        SetEnergyTimer(0);
+      } else if (num == 2 && FigurineModel.Ability2 != null) {
+        QueueAction( new UnitAction(FigurineModel.Ability2) );
+        SetEnergyTimer(0);
+      }
+    }
+  }
+
   //Processing Acting Turn
   public void ProcessFrame() {
     if (!IsAlive) {
+      return;
+    }
+
+    //Ability Queued
+    if (actionQueued) {
       return;
     }
 
@@ -113,6 +145,9 @@ public class BattleUnit {
     } else {
       ProcessAutoAttackTimer();
     }
+
+    //Gain Energy
+    ProcessEnergyTimer();
   }
 
   public UnitAction ReadiedAction() {

@@ -23,6 +23,12 @@ public class BattleUnitView : MonoBehaviour
   public void UpdateView(BattleUnit unit) { 
     healthBar.fillAmount = (float)unit.CurrentHealth / (float)unit.MaxHealth;
     attackBar.fillAmount = 1f - ((float)unit.AutoAttackTimer / (float)unit.MaxAttackTimer);
+
+    if (!unit.IsAlive) {
+      image.gameObject.SetActive(false);
+      healthBar.gameObject.SetActive(false);
+      attackBar.gameObject.SetActive(false);
+    }
   }
 
   public void AnimateFX(ActionFX fx) {

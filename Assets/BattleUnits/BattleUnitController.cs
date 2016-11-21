@@ -36,7 +36,20 @@ public class BattleUnitController : MonoBehaviour
       battleUnit.Damage(action.Damage);
       AnimateFX(ActionFX.Hit);
     }
+    else if (action.type == UnitAction.ActionType.Ability) {
+      if (action.unitAbility.AbilityEffect == UnitAbility.EffectType.Damage) {
+        battleUnit.Damage(action.Damage);
+        AnimateFX(ActionFX.Hit);
+      } else if (action.unitAbility.AbilityEffect == UnitAbility.EffectType.Healing) {
+        battleUnit.Heal(action.Damage);
+        AnimateFX(ActionFX.Heal);
+      }
+    }
     battleUnitView.UpdateView(battleUnit);
+  }
+
+  public void UseAbility(int num) {
+    battleUnit.UseAbility(num);
   }
 
   public void AnimateFX(ActionFX fx) {
