@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StatCalculator
 {
-  const int HEALTH_POINTS_BASE = 500;
+  const int HEALTH_POINTS_BASE = 1000;
   const int HEALTH_POINTS_PER_VITALITY = 10;
 
   const int ATTACK_TIMER_BASE = 30;

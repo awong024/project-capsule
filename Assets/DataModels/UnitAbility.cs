@@ -4,8 +4,7 @@ using System.Collections;
 public class UnitAbility : ScriptableObject {
   public enum EffectType {
     Damage,
-    Healing,
-    Shield
+    Healing
   }
 
   [SerializeField] string abilityName;

@@ -18,7 +18,8 @@ public class UnitFrame : MonoBehaviour {
 
     if (unitController.BattleUnit.FigurineModel.Ability1 != null) {
       ability1_image.sprite = unitController.BattleUnit.FigurineModel.Ability1.AbilityIcon;
-    } else if (unitController.BattleUnit.FigurineModel.Ability2 != null) {
+    }
+    if (unitController.BattleUnit.FigurineModel.Ability2 != null) {
       ability2_image.sprite = unitController.BattleUnit.FigurineModel.Ability2.AbilityIcon;
     }
   }

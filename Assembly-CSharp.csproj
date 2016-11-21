@@ -58,6 +58,7 @@
      <Compile Include="Assets\DataModels\FigurineModel.cs" />
      <Compile Include="Assets\DataModels\StatWeightModel.cs" />
      <Compile Include="Assets\DataModels\UnitAbility.cs" />
+     <Compile Include="Assets\DataModels\UnitBuff.cs" />
      <Compile Include="Assets\Gacha\GachaPanel.cs" />
      <Compile Include="Assets\Gacha\PrizePanel.cs" />
      <Compile Include="Assets\Utility\CreateScriptableObjects.cs" />
