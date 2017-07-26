@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Battle HUD\Scripts\BattleHUD.cs" />
+     <Compile Include="Assets\Battle HUD\Scripts\UnitCard.cs" />
+     <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\StatCalculator.cs" />
