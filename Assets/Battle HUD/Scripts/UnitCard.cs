@@ -6,16 +6,26 @@ using UnityEngine.EventSystems;
 
 public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+  [SerializeField] FigurineModel testFigurineModel;
+
   private BattleHUD battleHUD;
   private FigurineModel figurineModel;
+
+  public FigurineModel FigurineModel { get { return figurineModel; } }
 
   public void Init(BattleHUD battleHUD, FigurineModel figurineModel) {
     this.battleHUD = battleHUD;
     this.figurineModel = figurineModel;
   }
 
+  //Testing only
+  public void Init(BattleHUD battleHUD) {
+    this.battleHUD = battleHUD;
+    this.figurineModel = testFigurineModel;
+  }
+
   public void PlayCard() {
-    //TODO: Delete this card
+    GameObject.Destroy(this.gameObject);
   }
 
   //UI Dragging Mechanics

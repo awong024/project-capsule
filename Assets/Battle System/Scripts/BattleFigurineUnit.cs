@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BattleFigurineUnit : MonoBehaviour {
+public class BattleFigurineUnit : MonoBehaviour
+{
+  [SerializeField] Image unitSprite;
 
-  public BattleFigurineUnit(FigurineModel model) {
+  private int currentHealth;
 
+  public void Init(FigurineModel model) {
+    unitSprite.sprite = model.Sprite;
   }
 }

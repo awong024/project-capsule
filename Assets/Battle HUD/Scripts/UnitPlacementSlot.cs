@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {
   [SerializeField] Image slotHighlight;
 
+  [SerializeField] GameObject battleFigurinePrefab;
+  [SerializeField] Transform figureSpawnPosition;
+
   private BattleHUD battleHUD;
 
   private BattleFigurineUnit placedUnit;
@@ -16,7 +19,20 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   }
 
   public void DeployCard(UnitCard card) {
+    GameObject figurine = GameObject.Instantiate(battleFigurinePrefab) as GameObject;
+    figurine.transform.SetParent(figureSpawnPosition, false);
 
+    BattleFigurineUnit figurineUnit = figurine.GetComponent<BattleFigurineUnit>();
+    figurineUnit.Init(card.FigurineModel);
+
+    placedUnit = figurineUnit;
+  }
+
+  private void UnDeployCard() {
+    foreach(Transform child in figureSpawnPosition) {
+      GameObject.Destroy(child);
+    }
+    placedUnit = null;
   }
 
   private bool SlotAvailable() {

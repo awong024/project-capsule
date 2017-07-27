@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class BattleHUD : MonoBehaviour {
   [SerializeField] UnitPlacementSlot[] unitSlots;
 
-  public UnitCard heldCard = null;
+  //Testing only
+  [SerializeField] UnitCard[] firstCards;
+
+  private UnitCard heldCard = null;
   private bool isCardDragging = false;
 	
   void Start() {
@@ -14,8 +17,10 @@ public class BattleHUD : MonoBehaviour {
       slot.Init(this);
     }
 
-    //Testing
-    heldCard.Init(this, null);
+    //Testing only
+    foreach(UnitCard card in firstCards) {
+      card.Init(this);
+    }
   }
 
   public void CardDragging(UnitCard card) {
@@ -33,9 +38,11 @@ public class BattleHUD : MonoBehaviour {
 
   public void CardDroppedOnSlot(UnitPlacementSlot slot) {
     //TODO: Check validity of Deploy
-    if (true) {
-      heldCard.PlayCard();
+    if (true) {      
       slot.DeployCard(heldCard);
+      heldCard.PlayCard();
+
+      StopCardDragging();
     }
   }
 }
