@@ -49,9 +49,12 @@
      <Compile Include="Assets\Battle HUD\Scripts\BattleHUD.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitCard.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
-     <Compile Include="Assets\Battle System\Scripts\AbilityModel.cs" />
-     <Compile Include="Assets\Battle System\Scripts\BattleFigurineUnit.cs" />
-     <Compile Include="Assets\Battle System\Scripts\FigurineModel.cs" />
+     <Compile Include="Assets\Battle System\Scripts\System\BattleController.cs" />
+     <Compile Include="Assets\Battle System\Scripts\System\BattleSession.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\AbilityModel.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineUnit.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineView.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\FigurineModel.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\StatCalculator.cs" />
