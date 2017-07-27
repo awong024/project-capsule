@@ -7,13 +7,15 @@ using UnityEngine.EventSystems;
 public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
   private BattleHUD battleHUD;
+  private FigurineModel figurineModel;
 
-  public void Init(BattleHUD battleHUD) {
+  public void Init(BattleHUD battleHUD, FigurineModel figurineModel) {
     this.battleHUD = battleHUD;
+    this.figurineModel = figurineModel;
   }
 
-  public void DeployToSlot(UnitPlacementSlot slot) {
-    
+  public void PlayCard() {
+    //TODO: Delete this card
   }
 
   //UI Dragging Mechanics
@@ -39,6 +41,7 @@ public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     RectTransform rect = GetComponent<RectTransform>();
     rect.position = startDragPosition;
 
+    battleHUD.StopCardDragging();
     GetComponent<CanvasGroup>().blocksRaycasts = true;
   }
 }

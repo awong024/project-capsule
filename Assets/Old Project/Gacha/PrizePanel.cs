@@ -15,9 +15,9 @@ public class PrizePanel : MonoBehaviour {
     nameLabel.text = model.Name;
     rarityLabel.text = model.Rarity.ToString();
     figurineSprite.sprite = model.Sprite;
-    strengthLabel.text = model.Strength.ToString();
-    agilityLabel.text = model.Agility.ToString();
-    intellectLabel.text = model.Intellect.ToString();
-    vitalityLabel.text = model.Vitality.ToString();
+//    strengthLabel.text = model.Strength.ToString();
+//    agilityLabel.text = model.Agility.ToString();
+//    intellectLabel.text = model.Intellect.ToString();
+//    vitalityLabel.text = model.Vitality.ToString();
   }
 }

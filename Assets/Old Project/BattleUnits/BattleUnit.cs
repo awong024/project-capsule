@@ -15,10 +15,10 @@ public class BattleUnit {
   #endregion
 
   #region Stats
-  public int Strength { get { return model.Strength; } }
-  public int Agility { get { return model.Agility; } }
-  public int Intellect { get { return model.Intellect; } }
-  public int Vitality { get { return model.Vitality; } }
+  public int Strength { get { return 0; } }
+  public int Agility { get { return 0; } }
+  public int Intellect { get { return 0; } }
+  public int Vitality { get { return 0; } }
   #endregion
 
   #region Battle State
@@ -57,7 +57,7 @@ public class BattleUnit {
   #region Timers
   //Reset AutoAttack Timer
   private void SetAutoAttackTimer(bool randomHeadstart = false) {
-    autoAttackTimer = maxAttackTimer = StatCalculator.AttackTimerFromAgility(model.Agility);
+//    autoAttackTimer = maxAttackTimer = StatCalculator.AttackTimerFromAgility(model.Agility);
 
     //At battle start, units will stagger auto-attack timers slightly
     if (randomHeadstart) {
@@ -80,7 +80,7 @@ public class BattleUnit {
   }
 
   private void ProcessEnergyTimer() {
-    energy = Mathf.Min( MAX_ENERGY, energy + StatCalculator.EnergyPerTurnFromAgilityAndIntellect(model.Agility, model.Intellect) );
+//    energy = Mathf.Min( MAX_ENERGY, energy + StatCalculator.EnergyPerTurnFromAgilityAndIntellect(model.Agility, model.Intellect) );
   }
 
   private void StartCastTime() {
@@ -97,7 +97,7 @@ public class BattleUnit {
   public bool IsAlive { get { return currentHealth > 0; } }
 
   private void SetMaxHealth() {
-    currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);
+//    currentHealth = maxHealth = StatCalculator.HealthFromVitality(model.Vitality);
   }
 
   public void Damage(int amount) {
@@ -116,15 +116,15 @@ public class BattleUnit {
 
   //Use Ability from UnitFrame
   public void UseAbility(int num) {
-    if (energy >= MAX_ENERGY) {
-      if (num == 1 && FigurineModel.Ability1 != null) {
-        QueueAction( new UnitAction(FigurineModel.Ability1) );
-        SetEnergyTimer(0);
-      } else if (num == 2 && FigurineModel.Ability2 != null) {
-        QueueAction( new UnitAction(FigurineModel.Ability2) );
-        SetEnergyTimer(0);
-      }
-    }
+//    if (energy >= MAX_ENERGY) {
+//      if (num == 1 && FigurineModel.Ability1 != null) {
+//        QueueAction( new UnitAction(FigurineModel.Ability1) );
+//        SetEnergyTimer(0);
+//      } else if (num == 2 && FigurineModel.Ability2 != null) {
+//        QueueAction( new UnitAction(FigurineModel.Ability2) );
+//        SetEnergyTimer(0);
+//      }
+//    }
   }
 
   //Processing Acting Turn

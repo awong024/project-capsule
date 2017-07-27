@@ -9,8 +9,21 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
 
   private BattleHUD battleHUD;
 
+  private BattleFigurineUnit placedUnit;
+
   public void Init(BattleHUD battleHUD) {
     this.battleHUD = battleHUD;
+  }
+
+  public void DeployCard(UnitCard card) {
+
+  }
+
+  private bool SlotAvailable() {
+    if (placedUnit == null) {
+      return true;
+    }
+    return false;
   }
 
   private void HighlightSlot(bool enable) {
@@ -18,7 +31,9 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   }
 
   public void OnPointerEnter(PointerEventData eventData) {
-    HighlightSlot(true);
+    if (battleHUD.IsCardDragging() && SlotAvailable()) {
+      HighlightSlot(true);
+    }
   }
 
   public void OnPointerExit(PointerEventData eventData) {
@@ -26,7 +41,8 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   }
 
   public void OnDrop(PointerEventData eventData) {
-    Debug.Log("Dropped on!");
-    battleHUD.CardDroppedOnSlot(this);
+    if (SlotAvailable()) {
+      battleHUD.CardDroppedOnSlot(this);
+    }
   }
 }

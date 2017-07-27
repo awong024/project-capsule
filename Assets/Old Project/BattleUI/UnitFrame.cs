@@ -16,12 +16,12 @@ public class UnitFrame : MonoBehaviour {
     this.unit = unitController;
     portrait.sprite = unitController.BattleUnit.FigurineModel.Sprite;
 
-    if (unitController.BattleUnit.FigurineModel.Ability1 != null) {
-      ability1_image.sprite = unitController.BattleUnit.FigurineModel.Ability1.AbilityIcon;
-    }
-    if (unitController.BattleUnit.FigurineModel.Ability2 != null) {
-      ability2_image.sprite = unitController.BattleUnit.FigurineModel.Ability2.AbilityIcon;
-    }
+//    if (unitController.BattleUnit.FigurineModel.Ability1 != null) {
+//      ability1_image.sprite = unitController.BattleUnit.FigurineModel.Ability1.AbilityIcon;
+//    }
+//    if (unitController.BattleUnit.FigurineModel.Ability2 != null) {
+//      ability2_image.sprite = unitController.BattleUnit.FigurineModel.Ability2.AbilityIcon;
+//    }
   }
 
   public void Render() {

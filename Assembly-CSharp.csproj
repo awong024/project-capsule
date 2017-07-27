@@ -49,6 +49,9 @@
      <Compile Include="Assets\Battle HUD\Scripts\BattleHUD.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitCard.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
+     <Compile Include="Assets\Battle System\Scripts\AbilityModel.cs" />
+     <Compile Include="Assets\Battle System\Scripts\BattleFigurineUnit.cs" />
+     <Compile Include="Assets\Battle System\Scripts\FigurineModel.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\StatCalculator.cs" />
@@ -59,7 +62,6 @@
      <Compile Include="Assets\Old Project\BattleUnits\BattleUnit.cs" />
      <Compile Include="Assets\Old Project\BattleUnits\BattleUnitController.cs" />
      <Compile Include="Assets\Old Project\BattleUnits\BattleUnitView.cs" />
-     <Compile Include="Assets\Old Project\DataModels\FigurineModel.cs" />
      <Compile Include="Assets\Old Project\DataModels\StatWeightModel.cs" />
      <Compile Include="Assets\Old Project\DataModels\UnitAbility.cs" />
      <Compile Include="Assets\Old Project\DataModels\UnitBuff.cs" />
