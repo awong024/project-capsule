@@ -24,6 +24,8 @@ public class BattleFigurineUnit : MonoBehaviour
   public int Attack         { get { return figurineModel.Attack; } }
   public int Armor          { get { return figurineModel.Armor; } }
 
+  public FigurineModel FigurineModel { get { return figurineModel; } }
+
   public void Init(FigurineModel model) {
     view.Render(model);
 
@@ -33,7 +35,6 @@ public class BattleFigurineUnit : MonoBehaviour
 
   public bool ProcessAction(int actionPoints) {
     attackTimer -= actionPoints;
-    Debug.Log("AttackTimer: " + attackTimer);
     if (attackTimer <= 0) {
       attackTimer = START_ATTACK_TIMER;
       return true;
@@ -42,8 +43,8 @@ public class BattleFigurineUnit : MonoBehaviour
   }
 
   public void DealDamage(BattleFigurineUnit target) {
-    target.ChangeHealth(20);
-//    Debug.Log("Deal " + figurineModel.Attack + " damage");
+    target.ChangeHealth(Attack);
+    Debug.Log(FigurineModel.Name + " deals " + Attack + " damage to " + target.FigurineModel.Name);
   }
 
   public void ChangeHealth(int delta) {

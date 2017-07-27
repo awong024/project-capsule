@@ -52,6 +52,12 @@ public class BattleSession : MonoBehaviour
   #region Unit Management
   private List<BattleFigurineUnit> battleUnits = new List<BattleFigurineUnit>();
   [SerializeField] BattleFigurineUnit bossUnit; //Test only, load in boss through BattleController
+  [SerializeField] FigurineModel bossModel; //Test only
+
+  //Test load boss unit, Remove
+  void Start() {
+    bossUnit.Init(bossModel);
+  }
 
   public bool CanDeployUnit(UnitCard card) {
     //TODO: Determine if card can be played
