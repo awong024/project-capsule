@@ -53,11 +53,17 @@ public class BattleFigurineUnit : MonoBehaviour
   public void DealDamage(BattleFigurineUnit target) {
     target.ChangeHealth(Attack);
     Debug.Log(FigurineModel.Name + " deals " + Attack + " damage to " + target.FigurineModel.Name);
+
+    view.PlayAttackAnimation();
   }
 
   private void ChangeHealth(int delta) {
     currentHealth = Mathf.Max(currentHealth - delta, 0);
     view.UpdateHealthBar((float)currentHealth / (float)MaxHealth);
+
+    if (delta > 0) {
+      view.PlayHitAnimation();
+    }
 
     if (currentHealth <= 0) {      
       DeleteUnit();
