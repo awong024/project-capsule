@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {
+  [SerializeField] bool headNode = false;
+  [SerializeField] UnitPlacementSlot[] protectorNodes;
+
   [SerializeField] Image slotHighlight;
 
   [SerializeField] GameObject battleFigurinePrefab;
@@ -13,6 +16,10 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   private BattleHUD battleHUD;
 
   private BattleFigurineUnit placedUnit;
+
+  public BattleFigurineUnit PlacedUnit { get { return placedUnit; } }
+  public bool HeadNode { get { return headNode; } }
+  public UnitPlacementSlot[] ProtectorNodes { get { return protectorNodes; } }
 
   public void Init(BattleHUD battleHUD) {
     this.battleHUD = battleHUD;
@@ -24,7 +31,7 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   }
 
   public void OnPointerEnter(PointerEventData eventData) {
-    if (battleHUD.IsCardDragging() && SlotAvailable()) {
+    if (battleHUD.IsCardDragging() && !UnitPresent()) {
       HighlightSlot(true);
     }
   }
@@ -34,7 +41,7 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
   }
 
   public void OnDrop(PointerEventData eventData) {
-    if (SlotAvailable()) {
+    if (!UnitPresent()) {
       battleHUD.CardDroppedOnSlot(this);
     }
   }
@@ -45,22 +52,19 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
     figurine.transform.SetParent(figureSpawnPosition, false);
 
     BattleFigurineUnit figurineUnit = figurine.GetComponent<BattleFigurineUnit>();
-    figurineUnit.Init(card.FigurineModel);
+    figurineUnit.Init(card.FigurineModel, this);
 
     placedUnit = figurineUnit;
 
     return figurineUnit;
   }
 
-  private void UnDeployCard() {
-    foreach(Transform child in figureSpawnPosition) {
-      GameObject.Destroy(child);
-    }
+  public void UnDeployUnit() {
     placedUnit = null;
   }
 
-  private bool SlotAvailable() {
-    if (placedUnit == null) {
+  public bool UnitPresent() {
+    if (placedUnit != null) {
       return true;
     }
     return false;

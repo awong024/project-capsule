@@ -13,6 +13,8 @@ public class BattleHUD : MonoBehaviour {
 
   private UnitCard heldCard = null;
   private bool isCardDragging = false;
+
+  public UnitPlacementSlot[] UnitNodes { get { return unitSlots; } }
 	
   public void Init(BattleController battleController) {
     this.battleController = battleController;

@@ -13,7 +13,7 @@ public class BattleController : MonoBehaviour
 
   private void LaunchBattle() {
     battleHUD.Init(this);
-    battleSession.Init(this);
+    battleSession.Init(this, battleHUD.UnitNodes);
 
     battleSession.ResumeGame();
   }

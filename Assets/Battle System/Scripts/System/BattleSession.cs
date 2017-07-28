@@ -6,8 +6,9 @@ public class BattleSession : MonoBehaviour
 {
   private BattleController battleController;
 
-  public void Init(BattleController battleController) {
+  public void Init(BattleController battleController, UnitPlacementSlot[] unitNodes) {
     this.battleController = battleController;
+    this.unitNodes = unitNodes;
     StartCoroutine(GameLoop());
   }
 
@@ -54,9 +55,11 @@ public class BattleSession : MonoBehaviour
   [SerializeField] BattleFigurineUnit bossUnit; //Test only, load in boss through BattleController
   [SerializeField] FigurineModel bossModel; //Test only
 
+  private UnitPlacementSlot[] unitNodes;
+
   //Test load boss unit, Remove
   void Start() {
-    bossUnit.Init(bossModel);
+    bossUnit.Init(bossModel, null);
   }
 
   public bool CanDeployUnit(UnitCard card) {
@@ -65,7 +68,38 @@ public class BattleSession : MonoBehaviour
   }
 
   public void DeployUnit(BattleFigurineUnit unit) {
+    unit.ConnectSession(this);
     battleUnits.Add(unit);
+  }
+
+  public void RemoveUnit(BattleFigurineUnit unit) {
+    battleUnits.Remove(unit);
+  }
+
+  private List<BattleFigurineUnit> UnProtectedUnits() {
+    List<BattleFigurineUnit> unprotectedUnits = new List<BattleFigurineUnit>();
+    foreach(BattleFigurineUnit unit in battleUnits) {
+      if (!unit.IsProtected()) {
+        unprotectedUnits.Add(unit);
+      }
+    }
+    return unprotectedUnits;
+  }
+
+  private List<BattleFigurineUnit> SelectUnProtectedUnits(List<BattleFigurineUnit> unitPool, int numTargets) {
+    List<BattleFigurineUnit> selectedUnits = new List<BattleFigurineUnit>();
+    for (int i = 0; i < numTargets; i++) {
+      if (unitPool.Count > 0) {
+        int index = UnityEngine.Random.Range(0, unitPool.Count);
+        selectedUnits.Add(unitPool[index]);
+        unitPool.RemoveAt(index);
+      }
+    }
+    return selectedUnits;
+  }
+
+  public void UnitDeath(BattleFigurineUnit unit) {
+    RemoveUnit(unit);
   }
   #endregion
 
@@ -78,7 +112,9 @@ public class BattleSession : MonoBehaviour
     }
     if (battleUnits.Count > 0) {
       if (bossUnit.ProcessAction(actionPoints * 2)) {
-        bossUnit.DealDamage(battleUnits[0]);
+        foreach(BattleFigurineUnit battleUnit in SelectUnProtectedUnits( UnProtectedUnits(), 1 )) {
+          bossUnit.DealDamage(battleUnit);
+        }
       }
     }
   }

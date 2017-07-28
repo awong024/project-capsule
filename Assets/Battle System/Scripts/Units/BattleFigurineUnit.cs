@@ -8,6 +8,8 @@ public class BattleFigurineUnit : MonoBehaviour
   [SerializeField] BattleFigurineView view;
 
   private FigurineModel figurineModel;
+  private UnitPlacementSlot unitPosition;
+  private BattleSession battleSession;
   private const int START_ATTACK_TIMER = 100;
 
   private int currentHealth;
@@ -26,11 +28,17 @@ public class BattleFigurineUnit : MonoBehaviour
 
   public FigurineModel FigurineModel { get { return figurineModel; } }
 
-  public void Init(FigurineModel model) {
+  public void Init(FigurineModel model, UnitPlacementSlot slot) {
     view.Render(model);
 
     figurineModel = model;
+    unitPosition = slot;
+
     currentHealth = MaxHealth;
+  }
+
+  public void ConnectSession(BattleSession battleSession) {
+    this.battleSession = battleSession;
   }
 
   public bool ProcessAction(int actionPoints) {
@@ -47,8 +55,33 @@ public class BattleFigurineUnit : MonoBehaviour
     Debug.Log(FigurineModel.Name + " deals " + Attack + " damage to " + target.FigurineModel.Name);
   }
 
-  public void ChangeHealth(int delta) {
+  private void ChangeHealth(int delta) {
     currentHealth = Mathf.Max(currentHealth - delta, 0);
     view.UpdateHealthBar((float)currentHealth / (float)MaxHealth);
+
+    if (currentHealth <= 0) {      
+      DeleteUnit();
+    }
+  }
+
+  private void DeleteUnit() {
+    //Contact Battle Session to remove from system
+    battleSession.UnitDeath(this);
+
+    //Contact UnitPlacementSlot
+    unitPosition.UnDeployUnit();
+
+    GameObject.DestroyImmediate(gameObject);
+  }
+
+  public bool IsProtected() {
+    if (unitPosition != null) {      
+      foreach(UnitPlacementSlot protectorSlot in unitPosition.ProtectorNodes) {
+        if (protectorSlot.UnitPresent()) { 
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
