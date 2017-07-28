@@ -9,10 +9,14 @@ public class BattleHUD : MonoBehaviour {
   //Testing only
   [SerializeField] UnitCard[] firstCards;
 
+  private BattleController battleController;
+
   private UnitCard heldCard = null;
   private bool isCardDragging = false;
 	
-  void Start() {
+  public void Init(BattleController battleController) {
+    this.battleController = battleController;
+
     foreach(UnitPlacementSlot slot in unitSlots) {
       slot.Init(this);
     }
@@ -37,12 +41,15 @@ public class BattleHUD : MonoBehaviour {
   }
 
   public void CardDroppedOnSlot(UnitPlacementSlot slot) {
-    //TODO: Check validity of Deploy
-    if (true) {      
-      slot.DeployCard(heldCard);
-      heldCard.PlayCard();
+    battleController.TryDeployUnit(heldCard, slot);
+  }
 
-      StopCardDragging();
-    }
+  public BattleFigurineUnit ConfirmDeployUnit(UnitCard card, UnitPlacementSlot slot) {    
+    BattleFigurineUnit BFU = slot.DeployCard(card);
+    heldCard.PlayCard();
+
+    StopCardDragging();
+
+    return BFU;
   }
 }

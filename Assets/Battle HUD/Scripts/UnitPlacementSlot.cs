@@ -18,30 +18,7 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
     this.battleHUD = battleHUD;
   }
 
-  public void DeployCard(UnitCard card) {
-    GameObject figurine = GameObject.Instantiate(battleFigurinePrefab) as GameObject;
-    figurine.transform.SetParent(figureSpawnPosition, false);
-
-    BattleFigurineUnit figurineUnit = figurine.GetComponent<BattleFigurineUnit>();
-    figurineUnit.Init(card.FigurineModel);
-
-    placedUnit = figurineUnit;
-  }
-
-  private void UnDeployCard() {
-    foreach(Transform child in figureSpawnPosition) {
-      GameObject.Destroy(child);
-    }
-    placedUnit = null;
-  }
-
-  private bool SlotAvailable() {
-    if (placedUnit == null) {
-      return true;
-    }
-    return false;
-  }
-
+  #region UI Interactions
   private void HighlightSlot(bool enable) {
     slotHighlight.gameObject.SetActive(enable);
   }
@@ -60,5 +37,32 @@ public class UnitPlacementSlot : MonoBehaviour, IDropHandler, IPointerEnterHandl
     if (SlotAvailable()) {
       battleHUD.CardDroppedOnSlot(this);
     }
+  }
+  #endregion
+
+  public BattleFigurineUnit DeployCard(UnitCard card) {
+    GameObject figurine = GameObject.Instantiate(battleFigurinePrefab) as GameObject;
+    figurine.transform.SetParent(figureSpawnPosition, false);
+
+    BattleFigurineUnit figurineUnit = figurine.GetComponent<BattleFigurineUnit>();
+    figurineUnit.Init(card.FigurineModel);
+
+    placedUnit = figurineUnit;
+
+    return figurineUnit;
+  }
+
+  private void UnDeployCard() {
+    foreach(Transform child in figureSpawnPosition) {
+      GameObject.Destroy(child);
+    }
+    placedUnit = null;
+  }
+
+  private bool SlotAvailable() {
+    if (placedUnit == null) {
+      return true;
+    }
+    return false;
   }
 }

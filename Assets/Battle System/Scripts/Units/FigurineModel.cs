@@ -16,6 +16,9 @@ public class FigurineModel : ScriptableObject {
   [SerializeField] int health;
   [SerializeField] int armor;
 
+  [SerializeField] AbilityModel useAbility;
+  [SerializeField] AbilityModel deployAbility;
+
   public FigurineRarity Rarity { get { return rarity; } }
   public string Name { get { return figureName; } }
   public Sprite Sprite { get { return sprite; } }
