@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Battle HUD\Scripts\BattleHUD.cs" />
+     <Compile Include="Assets\Battle HUD\Scripts\CardLoader.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitCard.cs" />
      <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
      <Compile Include="Assets\Battle System\Scripts\System\BattleController.cs" />

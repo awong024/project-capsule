@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-  [SerializeField] FigurineModel testFigurineModel;
+  [SerializeField] Image cardImage;
 
   private BattleHUD battleHUD;
   private FigurineModel figurineModel;
@@ -16,12 +16,8 @@ public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
   public void Init(BattleHUD battleHUD, FigurineModel figurineModel) {
     this.battleHUD = battleHUD;
     this.figurineModel = figurineModel;
-  }
 
-  //Testing only
-  public void Init(BattleHUD battleHUD) {
-    this.battleHUD = battleHUD;
-    this.figurineModel = testFigurineModel;
+    cardImage.sprite = figurineModel.Sprite;
   }
 
   public void PlayCard() {

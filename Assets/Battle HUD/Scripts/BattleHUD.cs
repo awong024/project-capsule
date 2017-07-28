@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleHUD : MonoBehaviour {
+  [SerializeField] CardLoader cardLoader;
   [SerializeField] UnitPlacementSlot[] unitSlots;
-
-  //Testing only
-  [SerializeField] UnitCard[] firstCards;
 
   private BattleController battleController;
 
@@ -19,14 +17,13 @@ public class BattleHUD : MonoBehaviour {
   public void Init(BattleController battleController) {
     this.battleController = battleController;
 
+    cardLoader.Init(this);
+
     foreach(UnitPlacementSlot slot in unitSlots) {
       slot.Init(this);
     }
 
-    //Testing only
-    foreach(UnitCard card in firstCards) {
-      card.Init(this);
-    }
+    cardLoader.DealStartingHand();
   }
 
   public void CardDragging(UnitCard card) {
@@ -48,7 +45,9 @@ public class BattleHUD : MonoBehaviour {
 
   public BattleFigurineUnit ConfirmDeployUnit(UnitCard card, UnitPlacementSlot slot) {    
     BattleFigurineUnit BFU = slot.DeployCard(card);
-    heldCard.PlayCard();
+
+    cardLoader.PlayCard(heldCard);
+    cardLoader.AddCardToBelt();
 
     StopCardDragging();
 
