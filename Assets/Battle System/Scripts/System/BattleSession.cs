@@ -101,6 +101,10 @@ public class BattleSession : MonoBehaviour
   public void UnitDeath(BattleFigurineUnit unit) {
     RemoveUnit(unit);
   }
+
+  public void UseUnitAbility(BattleFigurineUnit unit) {
+
+  }
   #endregion
 
   #region Battle System
