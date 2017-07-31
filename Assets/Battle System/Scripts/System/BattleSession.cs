@@ -47,6 +47,7 @@ public class BattleSession : MonoBehaviour
 
   private void ProcessFrame() {
     DistributeActionPoints(4);
+    CheckEndGame();
   }
   #endregion
 
@@ -64,8 +65,7 @@ public class BattleSession : MonoBehaviour
   }
 
   public bool CanDeployUnit(UnitCard card) {
-    //TODO: Determine if card can be played
-    return true;
+    return manaSystem.PlayUnit(card.DeployCost);
   }
 
   public void DeployUnit(BattleFigurineUnit unit) {
@@ -151,12 +151,28 @@ public class BattleSession : MonoBehaviour
         sourceUnit.DealDamage(target);
       } else if (ability.Effect.Health_Effect == AbilityEffectModel.HealthEffect.Heal) {
         sourceUnit.Heal(target, ability);
+      } else if (ability.Effect.Health_Effect == AbilityEffectModel.HealthEffect.Interrupt) {
+        bossAbilityGenerator.InterruptCast();
       }
     }
 
     if (ability.GeneratedBuff != null) {
       target.AddBuff( new BattleFigurineUnit.UnitBuff(ability.GeneratedBuff) );
     }
+  }
+
+  private void CheckEndGame() {
+    if (manaSystem.IsTimerUp()) {
+      GameOver(win:false);
+    }
+    if (bossUnit.CurrentHealth <= 0) {
+      GameOver(win:true);
+    }
+  }
+
+  private void GameOver(bool win) {
+    PauseGame();
+    manaSystem.DisplayGameOver(win);
   }
 
   #endregion
