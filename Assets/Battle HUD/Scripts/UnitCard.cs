@@ -14,11 +14,14 @@ public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
   public FigurineModel FigurineModel { get { return figurineModel; } }
 
+  public int DeployCost { get { return figurineModel.DeployCost; } }
+
   public void Init(BattleHUD battleHUD, FigurineModel figurineModel) {
     this.battleHUD = battleHUD;
     this.figurineModel = figurineModel;
 
     cardImage.sprite = figurineModel.Sprite;
+    cardCost.text = figurineModel.DeployCost.ToString();
   }
 
   public void PlayCard() {

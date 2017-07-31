@@ -58,4 +58,8 @@ public class BossAbilityGenerator : MonoBehaviour {
     castingBarFill.fillAmount = (float)chargeAP / (float)abilities[selectedIndex].ChargeTime;
     castingBarText.text = abilities[selectedIndex].AbilityName;
   }
+
+  public void InterruptCast() {
+    SelectRandomAbility();
+  }
 }

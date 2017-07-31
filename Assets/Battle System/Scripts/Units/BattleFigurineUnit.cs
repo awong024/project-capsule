@@ -21,6 +21,7 @@ public class BattleFigurineUnit : MonoBehaviour
   private int baseArmor;
 
   //Accessors
+  public int DeployCost     { get { return figurineModel.DeployCost; } }
   public int CurrentHealth  { get { return currentHealth; } }
   public int MaxHealth      { get { return figurineModel.Health; } }
   public int Attack         { get { return figurineModel.Attack; } }
@@ -77,6 +78,7 @@ public class BattleFigurineUnit : MonoBehaviour
 
   public void Heal(BattleFigurineUnit target, AbilityModel ability) {
     target.ChangeHealth(-ability.Effect.Power);
+    target.PlayAnimation("Heal");
   }
 
   private void ChangeHealth(int delta) {

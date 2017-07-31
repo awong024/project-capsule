@@ -6,7 +6,8 @@ public class AbilityEffectModel : ScriptableObject {
   public enum HealthEffect { 
     None,
     Damage,
-    Heal
+    Heal,
+    Interrupt
   }
 
   [SerializeField] HealthEffect healthEffect;

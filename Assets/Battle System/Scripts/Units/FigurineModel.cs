@@ -23,6 +23,7 @@ public class FigurineModel : ScriptableObject {
 
   public FigurineRarity Rarity { get { return rarity; } }
   public string Name { get { return figureName; } }
+  public int    DeployCost { get { return deployCost; } }
   public Sprite Sprite { get { return sprite; } }
 
   public int Attack { get { return attack; } }
