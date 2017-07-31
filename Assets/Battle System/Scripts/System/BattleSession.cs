@@ -123,6 +123,8 @@ public class BattleSession : MonoBehaviour
       }
       bossAbilityGenerator.ProcessActionPoints(actionPoints);
     }
+
+    DistributeMana();
   }
 
   public void ExecuteAbility(BattleFigurineUnit sourceUnit, AbilityModel ability) {
@@ -179,6 +181,15 @@ public class BattleSession : MonoBehaviour
     foreach(BattleFigurineUnit unit in targets) {
       bossUnit.DealAbilityDamage(unit, ability);
     }
+  }
+
+  #endregion
+
+  #region Mana System
+  [SerializeField] ManaSystem manaSystem;
+
+  private void DistributeMana() {
+    manaSystem.GainMana();
   }
 
   #endregion

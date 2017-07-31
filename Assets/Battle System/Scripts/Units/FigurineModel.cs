@@ -12,6 +12,8 @@ public class FigurineModel : ScriptableObject {
   [SerializeField] string figureName;
   [SerializeField] Sprite sprite;
 
+  [SerializeField] int deployCost;
+
   [SerializeField] int attack;
   [SerializeField] int health;
   [SerializeField] int armor;

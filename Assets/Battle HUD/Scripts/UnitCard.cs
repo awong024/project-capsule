@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class UnitCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
   [SerializeField] Image cardImage;
+  [SerializeField] Text cardCost;
 
   private BattleHUD battleHUD;
   private FigurineModel figurineModel;

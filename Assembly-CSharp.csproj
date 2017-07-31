@@ -52,6 +52,7 @@
      <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
      <Compile Include="Assets\Battle System\Scripts\System\BattleController.cs" />
      <Compile Include="Assets\Battle System\Scripts\System\BattleSession.cs" />
+     <Compile Include="Assets\Battle System\Scripts\System\ManaSystem.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\AbilityEffectModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\AbilityModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineUnit.cs" />
