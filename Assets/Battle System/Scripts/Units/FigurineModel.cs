@@ -26,4 +26,7 @@ public class FigurineModel : ScriptableObject {
   public int Attack { get { return attack; } }
   public int Health { get { return health; } }
   public int Armor { get { return armor; } }
+
+  public AbilityModel CastAbility { get { return useAbility; } }
+  public AbilityModel DeployAbility { get { return deployAbility; } }
 }

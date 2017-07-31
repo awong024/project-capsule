@@ -35,14 +35,27 @@ public class BattleFigurineUnit : MonoBehaviour
     unitPosition = slot;
 
     currentHealth = MaxHealth;
+
+    if (figurineModel.CastAbility != null) {
+      abilityCooldown = figurineModel.CastAbility.Cooldown;
+    }
   }
 
+  //Combine this process with Init in the future
   public void ConnectSession(BattleSession battleSession) {
     this.battleSession = battleSession;
+
+    if (figurineModel.DeployAbility != null) {
+      battleSession.ExecuteAbility(this, figurineModel.DeployAbility);
+    }
   }
 
   public bool ProcessAction(int actionPoints) {
     attackTimer -= actionPoints;
+
+    ProcessBuffs(actionPoints);
+    ProcessAbilityCooldown(actionPoints);
+
     if (attackTimer <= 0) {
       attackTimer = START_ATTACK_TIMER;
       return true;
@@ -57,8 +70,21 @@ public class BattleFigurineUnit : MonoBehaviour
     view.PlayAttackAnimation();
   }
 
+  public void Heal(BattleFigurineUnit target, AbilityModel ability) {
+    target.ChangeHealth(-ability.Effect.Power);
+  }
+
   private void ChangeHealth(int delta) {
-    currentHealth = Mathf.Max(currentHealth - delta, 0);
+    foreach(UnitBuff buff in activeBuffs) {
+      if (buff.BuffType == UnitBuffModel.BuffType.Shield && delta > 0) {        
+        int absorbed = buff.CurrentPower >= delta ? delta : buff.CurrentPower;
+        delta -= absorbed;
+        buff.CurrentPower -= absorbed;
+      }
+    }
+
+    currentHealth = Mathf.Clamp(currentHealth - delta, 0, figurineModel.Health);
+
     view.UpdateHealthBar((float)currentHealth / (float)MaxHealth);
 
     if (delta > 0) {
@@ -90,4 +116,77 @@ public class BattleFigurineUnit : MonoBehaviour
     }
     return false;
   }
+
+  #region Buffs
+
+  public class UnitBuff {
+    
+    private UnitBuffModel model;
+    private int currentDuration;
+    private int currentPower;
+
+    public UnitBuff(UnitBuffModel model) {
+      this.model = model;
+      currentDuration = model.BuffDuration;
+      currentPower = model.BuffPower;
+    }
+
+    public string Name                      { get { return model.BuffName; } }
+    public UnitBuffModel.BuffType BuffType  { get { return model.Buff_Type; } }
+    public int BaseBuffDuration             { get { return model.BuffDuration; } }
+
+    public int CurrentDuration              { get { return currentDuration; } set { currentDuration = value; } }
+    public int CurrentPower                 { get { return currentPower; } set { currentPower = value; } }
+  }
+
+  public List<UnitBuff> activeBuffs = new List<UnitBuff>();
+
+  public void AddBuff(UnitBuff buff) {
+    activeBuffs.Add(buff);
+    view.EnableBuffSprite(true);
+  }
+
+  public void RemoveBuff(UnitBuff buff) {
+    activeBuffs.Remove(buff);
+    view.EnableBuffSprite(false);
+  }
+
+  private void ProcessBuffs(int actionPoints) {
+    //Tick down buffs
+    List<UnitBuff> expiredBuffs = new List<UnitBuff>();
+
+    foreach (UnitBuff buff in activeBuffs) {
+      buff.CurrentDuration -= actionPoints;
+      if (buff.CurrentDuration <= 0 || buff.CurrentPower <= 0) {
+        expiredBuffs.Add(buff);
+      }
+    }
+
+    foreach (UnitBuff buff in expiredBuffs) {
+      RemoveBuff(buff);
+    }
+  }
+
+  #endregion
+
+  #region Abilities
+
+  private int abilityCooldown = 0;
+
+  private void ProcessAbilityCooldown(int actionPoints) {
+    if (figurineModel.CastAbility != null && abilityCooldown > 0) {
+      abilityCooldown -= actionPoints;
+    }
+    if (figurineModel.CastAbility != null && abilityCooldown <= 0) {
+      view.EnableAbilityButton(true);
+    }
+  }
+
+  public void UseAbility() {
+    abilityCooldown = figurineModel.CastAbility.Cooldown;
+    battleSession.ExecuteAbility(this, figurineModel.CastAbility);
+    view.EnableAbilityButton(false);
+  }
+
+  #endregion
 }

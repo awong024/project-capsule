@@ -123,5 +123,37 @@ public class BattleSession : MonoBehaviour
     }
   }
 
+  public void ExecuteAbility(BattleFigurineUnit sourceUnit, AbilityModel ability) {
+    List<BattleFigurineUnit> targets = new List<BattleFigurineUnit>();
+
+    if (ability.Target_Mode == AbilityModel.TargetMode.Enemy) {
+      targets.Add(bossUnit);
+    } else if (ability.Target_Mode == AbilityModel.TargetMode.Team) {
+      foreach(BattleFigurineUnit unit in battleUnits) {
+        targets.Add(unit);
+      }
+    } else if (ability.Target_Mode == AbilityModel.TargetMode.Self) {
+      targets.Add(sourceUnit);
+    }
+
+    foreach(BattleFigurineUnit unit in targets) {
+      ApplyAbilityToUnit(ability, sourceUnit, unit);
+    }
+  }
+
+  private void ApplyAbilityToUnit(AbilityModel ability, BattleFigurineUnit sourceUnit, BattleFigurineUnit target) {
+    if (ability.Effect != null) {
+      if (ability.Effect.Health_Effect == AbilityEffectModel.HealthEffect.Damage) {
+        sourceUnit.DealDamage(target);
+      } else if (ability.Effect.Health_Effect == AbilityEffectModel.HealthEffect.Heal) {
+        sourceUnit.Heal(target, ability);
+      }
+    }
+
+    if (ability.GeneratedBuff != null) {
+      target.AddBuff( new BattleFigurineUnit.UnitBuff(ability.GeneratedBuff) );
+    }
+  }
+
   #endregion
 }

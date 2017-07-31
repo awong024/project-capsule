@@ -52,10 +52,13 @@
      <Compile Include="Assets\Battle HUD\Scripts\UnitPlacementSlot.cs" />
      <Compile Include="Assets\Battle System\Scripts\System\BattleController.cs" />
      <Compile Include="Assets\Battle System\Scripts\System\BattleSession.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\AbilityEffectModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\AbilityModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineUnit.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineView.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\BossAbilityModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\FigurineModel.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\UnitBuffModel.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleSystem.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\BattleTestHarness.cs" />
      <Compile Include="Assets\Old Project\BattleSystem\StatCalculator.cs" />
@@ -68,7 +71,6 @@
      <Compile Include="Assets\Old Project\BattleUnits\BattleUnitView.cs" />
      <Compile Include="Assets\Old Project\DataModels\StatWeightModel.cs" />
      <Compile Include="Assets\Old Project\DataModels\UnitAbility.cs" />
-     <Compile Include="Assets\Old Project\DataModels\UnitBuff.cs" />
      <Compile Include="Assets\Old Project\Gacha\GachaPanel.cs" />
      <Compile Include="Assets\Old Project\Gacha\PrizePanel.cs" />
      <Compile Include="Assets\Old Project\LobbyPanel.cs" />
