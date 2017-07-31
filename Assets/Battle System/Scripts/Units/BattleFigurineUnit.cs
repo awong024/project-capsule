@@ -70,6 +70,11 @@ public class BattleFigurineUnit : MonoBehaviour
     view.PlayAttackAnimation();
   }
 
+  public void DealAbilityDamage(BattleFigurineUnit target, AbilityModel ability) {
+    target.ChangeHealth(ability.Effect.Power);
+    target.PlayAnimation(ability.AbilityName == "Firestorm" ? "Fireball" : "Hit");
+  }
+
   public void Heal(BattleFigurineUnit target, AbilityModel ability) {
     target.ChangeHealth(-ability.Effect.Power);
   }
@@ -103,6 +108,13 @@ public class BattleFigurineUnit : MonoBehaviour
     //Contact UnitPlacementSlot
     unitPosition.UnDeployUnit();
 
+    view.PlayDeathAnimation();
+
+    StartCoroutine(DelayedDestroy());
+  }
+
+  private IEnumerator DelayedDestroy() {
+    yield return new WaitForSeconds(1f);
     GameObject.DestroyImmediate(gameObject);
   }
 
@@ -115,6 +127,10 @@ public class BattleFigurineUnit : MonoBehaviour
       }
     }
     return false;
+  }
+
+  public void PlayAnimation(string anim) {
+    view.PlayFX_Animation(anim);
   }
 
   #region Buffs

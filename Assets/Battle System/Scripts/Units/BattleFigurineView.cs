@@ -9,6 +9,8 @@ public class BattleFigurineView : MonoBehaviour {
   [SerializeField] Image abilitySprite;
   [SerializeField] Animator animator;
   [SerializeField] Image buffSprite;
+  [SerializeField] Animator buttonAnimator;
+  [SerializeField] Animator fxAnimator;
 	
   public void Render(FigurineModel model) {
     unitSprite.sprite = model.Sprite;
@@ -16,7 +18,6 @@ public class BattleFigurineView : MonoBehaviour {
     if (model.CastAbility != null) {
       abilitySprite.sprite = model.CastAbility.AbilityIcon;
     }
-    EnableAbilityButton(false);
   }
 
   public void UpdateHealthBar(float fillValue) {
@@ -24,8 +25,8 @@ public class BattleFigurineView : MonoBehaviour {
   }
 
   public void EnableAbilityButton(bool enable) {
-    if (abilitySprite != null && abilitySprite.gameObject.activeSelf != enable) {
-      abilitySprite.gameObject.SetActive(enable);
+    if (abilitySprite != null) {
+      buttonAnimator.SetTrigger(enable ? "Show" : "Hide");
     }
   }
 
@@ -39,6 +40,10 @@ public class BattleFigurineView : MonoBehaviour {
 
   public void PlayDeathAnimation() {
     animator.SetTrigger("Death");
+  }
+
+  public void PlayFX_Animation(string animName) {
+    fxAnimator.Play(animName);
   }
 
   //Hardcoded

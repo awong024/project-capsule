@@ -158,4 +158,28 @@ public class BattleSession : MonoBehaviour
   }
 
   #endregion
+
+  #region Boss Mechanics
+
+  //Setup a better system later
+  public void ExecuteBossAbility(BossAbilityModel ability) {
+    List<BattleFigurineUnit> targets = new List<BattleFigurineUnit>();
+
+    if (ability.AbilityName == "Firestorm") {
+      foreach(BattleFigurineUnit unit in battleUnits) {
+        targets.Add(unit);
+      }
+    } else if (ability.AbilityName == "Crushing Blow") {
+      if (battleUnits.Count > 0) {
+        int randIndex = UnityEngine.Random.Range(0, UnProtectedUnits().Count);
+        targets.Add(UnProtectedUnits()[randIndex]);
+      }
+    }
+
+    foreach(BattleFigurineUnit unit in targets) {
+      bossUnit.DealAbilityDamage(unit, ability);
+    }
+  }
+
+  #endregion
 }
