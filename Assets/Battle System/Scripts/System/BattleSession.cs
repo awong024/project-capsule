@@ -54,6 +54,7 @@ public class BattleSession : MonoBehaviour
   private List<BattleFigurineUnit> battleUnits = new List<BattleFigurineUnit>();
   [SerializeField] BattleFigurineUnit bossUnit; //Test only, load in boss through BattleController
   [SerializeField] FigurineModel bossModel; //Test only
+  [SerializeField] BossAbilityGenerator bossAbilityGenerator; //Test only
 
   private UnitPlacementSlot[] unitNodes;
 
@@ -120,6 +121,7 @@ public class BattleSession : MonoBehaviour
           bossUnit.DealDamage(battleUnit);
         }
       }
+      bossAbilityGenerator.ProcessActionPoints(actionPoints);
     }
   }
 

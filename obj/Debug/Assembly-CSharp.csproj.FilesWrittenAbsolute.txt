@@ -15,3 +15,7 @@
 /Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/alexwong/Desktop/project-capsule/Temp/bin/Debug/UnityEngine.VR.dll

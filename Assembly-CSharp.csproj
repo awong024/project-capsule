@@ -56,6 +56,7 @@
      <Compile Include="Assets\Battle System\Scripts\Units\AbilityModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineUnit.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BattleFigurineView.cs" />
+     <Compile Include="Assets\Battle System\Scripts\Units\BossAbilityGenerator.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\BossAbilityModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\FigurineModel.cs" />
      <Compile Include="Assets\Battle System\Scripts\Units\UnitBuffModel.cs" />
