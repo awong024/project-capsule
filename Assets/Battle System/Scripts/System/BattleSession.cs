@@ -203,9 +203,22 @@ public class BattleSession : MonoBehaviour
 
   #region Mana System
   [SerializeField] ManaSystem manaSystem;
+  [SerializeField] GameObject helpPopup;
 
   private void DistributeMana() {
     manaSystem.GainMana();
+  }
+
+  public void ToggleHelp() {
+    if (!helpPopup.activeSelf) {
+      PauseGame();
+      manaSystem.PauseTimer();
+      helpPopup.SetActive(true);
+    } else {
+      ResumeGame();
+      manaSystem.ResumeTimer();
+      helpPopup.SetActive(false);
+    }
   }
 
   #endregion
