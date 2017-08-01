@@ -105,10 +105,12 @@ public class BattleFigurineUnit : MonoBehaviour
 
   private void DeleteUnit() {
     //Contact Battle Session to remove from system
-    battleSession.UnitDeath(this);
+    if (battleSession != null) {
+      battleSession.UnitDeath(this);
 
-    //Contact UnitPlacementSlot
-    unitPosition.UnDeployUnit();
+      //Contact UnitPlacementSlot
+      unitPosition.UnDeployUnit();
+    }
 
     view.PlayDeathAnimation();
 

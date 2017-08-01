@@ -18,7 +18,7 @@ public class ManaSystem : MonoBehaviour {
   private bool paused = false;
 
   public void GainMana() {
-    mana += 0.15f;
+    mana += 0.1f;
 
     if (mana >= 10f) {
       mana = 10f;
